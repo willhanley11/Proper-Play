@@ -1,8 +1,7 @@
 "use client"
 import { useState, useMemo, useEffect } from "react"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
-import { HelpCircle, ArrowUpDown, ArrowUp, ArrowDown, ChevronDown } from "lucide-react"
-import DetailedBoxScore from "./detailed-box-score"
+import { HelpCircle, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 import React from "react"
 import { LigaNav } from "./liga-nav"
 
@@ -201,6 +200,11 @@ type StatType = "points" | "rebounds" | "assists" | "threePointers" | "steals" |
 
 // Update the function signature to include the hideNav prop with a default value of false
 export default function YamagataTeamStats({ initialTab = "league", hideNav = false }: YamagataTeamStatsProps) {
+  const [selectedPlayers, setSelectedPlayers] = useState<string[]>([])
+
+  const togglePlayerSelection = (playerId: string) => {
+    setSelectedPlayers((prev) => (prev.includes(playerId) ? prev.filter((id) => id !== playerId) : [...prev, playerId]))
+  }
   // Find the useState for activeTab and add a new state for tracking when to scroll
   const [activeTab, setActiveTab] = useState(initialTab)
   // Add a new state for progressive loading
@@ -639,6 +643,7 @@ export default function YamagataTeamStats({ initialTab = "league", hideNav = fal
       rank: 15,
       player: "Kyle Wiltjer",
       team: "TEN",
+      image: "https://media-cdn.incrowdsports.com/9e9bd8c7-6d91-4d1c-9dbd-274b3c0c5b89.png?width=200",
       gp: 15,
       gs: 10,
       min: "24:30",
@@ -931,314 +936,314 @@ export default function YamagataTeamStats({ initialTab = "league", hideNav = fal
 
   // League standings data with added Win%, SOS, and SOSu
   // League standings data with added Win%, SOS, and SOSu
-const leagueStandings = [
-  {
-    team: "Real Madrid",
-    wins: 12,
-    losses: 3,
-    winPct: 0.8,
-    sos: 8.2,
-    sosu: 9.1,
-    effFG: { value: 56.2, rank: 1 },
-    to: { value: 13.8, rank: 2 },
-    offReb: { value: 33.5, rank: 4 },
-    ftaFga: { value: 35.2, rank: 7 },
-    defEffFG: { value: 45.1, rank: 2 },
-    defTO: { value: 18.7, rank: 3 },
-    defOffReb: { value: 27.3, rank: 5 },
-    defFtaFga: { value: 29.8, rank: 4 },
-    upcomingGame: "vs Fenerbahce Beko Istanbul (Feb 11)",
-  },
-  {
-    team: "FC Barcelona",
-    wins: 11,
-    losses: 4,
-    winPct: 0.733,
-    sos: 7.5,
-    sosu: 8.7,
-    effFG: { value: 54.1, rank: 5 },
-    to: { value: 14.2, rank: 3 },
-    offReb: { value: 35.8, rank: 1 },
-    ftaFga: { value: 37.9, rank: 3 },
-    defEffFG: { value: 46.3, rank: 4 },
-    defTO: { value: 17.9, rank: 5 },
-    defOffReb: { value: 28.1, rank: 7 },
-    defFtaFga: { value: 30.5, rank: 6 },
-    upcomingGame: "at Baskonia Vitoria-Gasteiz (Feb 11)",
-  },
-  {
-    team: "Olympiacos Piraeus",
-    wins: 10,
-    losses: 5,
-    winPct: 0.667,
-    sos: 9.3,
-    sosu: 8.5,
-    effFG: { value: 55.3, rank: 2 },
-    to: { value: 14.9, rank: 4 },
-    offReb: { value: 31.2, rank: 8 },
-    ftaFga: { value: 38.7, rank: 5 },
-    defEffFG: { value: 44.8, rank: 1 },
-    defTO: { value: 19.2, rank: 2 },
-    defOffReb: { value: 26.8, rank: 3 },
-    defFtaFga: { value: 30.4, rank: 5 },
-    upcomingGame: "at Virtus Segafredo Bologna (Feb 11)",
-  },
-  {
-    team: "Fenerbahce Beko Istanbul",
-    wins: 10,
-    losses: 5,
-    winPct: 0.667,
-    sos: 8.8,
-    sosu: 7.9,
-    effFG: { value: 53.8, rank: 4 },
-    to: { value: 17.5, rank: 10 },
-    offReb: { value: 34.1, rank: 3 },
-    ftaFga: { value: 40.2, rank: 1 },
-    defEffFG: { value: 47.2, rank: 6 },
-    defTO: { value: 16.8, rank: 7 },
-    defOffReb: { value: 29.5, rank: 9 },
-    defFtaFga: { value: 31.7, rank: 8 },
-    upcomingGame: "at Real Madrid (Feb 11)",
-  },
-  {
-    team: "Baskonia Vitoria-Gasteiz",
-    wins: 9,
-    losses: 6,
-    winPct: 0.6,
-    sos: 9.1,
-    sosu: 9.4,
-    effFG: { value: 51.2, rank: 8 },
-    to: { value: 13.5, rank: 1 },
-    offReb: { value: 28.7, rank: 12 },
-    ftaFga: { value: 34.8, rank: 8 },
-    defEffFG: { value: 46.8, rank: 5 },
-    defTO: { value: 19.5, rank: 1 },
-    defOffReb: { value: 26.5, rank: 2 },
-    defFtaFga: { value: 28.9, rank: 2 },
-    upcomingGame: "vs FC Barcelona (Feb 11)",
-  },
-  {
-    team: "Virtus Segafredo Bologna",
-    wins: 9,
-    losses: 6,
-    winPct: 0.6,
-    sos: 7.8,
-    sosu: 8.3,
-    effFG: { value: 50.8, rank: 9 },
-    to: { value: 16.9, rank: 9 },
-    offReb: { value: 34.9, rank: 2 },
-    ftaFga: { value: 39.1, rank: 2 },
-    defEffFG: { value: 48.5, rank: 8 },
-    defTO: { value: 16.2, rank: 8 },
-    defOffReb: { value: 30.2, rank: 10 },
-    defFtaFga: { value: 32.3, rank: 9 },
-    upcomingGame: "vs Olympiacos Piraeus (Feb 11)",
-  },
-  {
-    team: "FC Bayern Munich",
-    wins: 8,
-    losses: 7,
-    winPct: 0.533,
-    sos: 6.9,
-    sosu: 7.5,
-    effFG: { value: 48.5, rank: 11 },
-    to: { value: 15.8, rank: 7 },
-    offReb: { value: 26.3, rank: 15 },
-    ftaFga: { value: 31.2, rank: 11 },
-    defEffFG: { value: 49.1, rank: 9 },
-    defTO: { value: 15.5, rank: 10 },
-    defOffReb: { value: 31.8, rank: 12 },
-    defFtaFga: { value: 33.5, rank: 11 },
-    upcomingGame: "at Olympiacos Piraeus (Feb 18)",
-  },
-  {
-    team: "Panathinaikos AKTOR Athens",
-    wins: 8,
-    losses: 7,
-    winPct: 0.533,
-    sos: 7.2,
-    sosu: 8.1,
-    effFG: { value: 52.1, rank: 7 },
-    to: { value: 18.7, rank: 14 },
-    offReb: { value: 30.8, rank: 9 },
-    ftaFga: { value: 36.5, rank: 6 },
-    defEffFG: { value: 47.9, rank: 7 },
-    defTO: { value: 15.9, rank: 9 },
-    defOffReb: { value: 28.9, rank: 8 },
-    defFtaFga: { value: 32.8, rank: 10 },
-    upcomingGame: "vs Olympiacos Piraeus (Feb 11)",
-  },
-  {
-    team: "AS Monaco",
-    wins: 7,
-    losses: 8,
-    winPct: 0.467,
-    sos: 8.5,
-    sosu: 7.8,
-    effFG: { value: 49.2, rank: 10 },
-    to: { value: 15.3, rank: 6 },
-    offReb: { value: 29.5, rank: 10 },
-    ftaFga: { value: 32.8, rank: 10 },
-    defEffFG: { value: 50.2, rank: 10 },
-    defTO: { value: 14.8, rank: 11 },
-    defOffReb: { value: 30.5, rank: 11 },
-    defFtaFga: { value: 34.2, rank: 12 },
-    upcomingGame: "at Olympiacos Piraeus (Feb 25)",
-  },
-  {
-    team: "EA7 Emporio Armani Milan",
-    wins: 6,
-    losses: 9,
-    winPct: 0.4,
-    sos: 8.9,
-    sosu: 8.2,
-    effFG: { value: 47.3, rank: 13 },
-    to: { value: 19.2, rank: 16 },
-    offReb: { value: 30.5, rank: 7 },
-    ftaFga: { value: 29.8, rank: 14 },
-    defEffFG: { value: 51.5, rank: 11 },
-    defTO: { value: 14.2, rank: 12 },
-    defOffReb: { value: 32.1, rank: 13 },
-    defFtaFga: { value: 35.1, rank: 13 },
-    upcomingGame: "at Fenerbahce Beko Istanbul (Feb 11)",
-  },
-  {
-    team: "ALBA Berlin",
-    wins: 6,
-    losses: 9,
-    winPct: 0.4,
-    sos: 7.6,
-    sosu: 7.3,
-    effFG: { value: 48.9, rank: 12 },
-    to: { value: 16.5, rank: 8 },
-    offReb: { value: 29.1, rank: 11 },
-    ftaFga: { value: 33.5, rank: 9 },
-    defEffFG: { value: 52.3, rank: 12 },
-    defTO: { value: 13.9, rank: 13 },
-    defOffReb: { value: 27.8, rank: 6 },
-    defFtaFga: { value: 29.5, rank: 3 },
-    upcomingGame: "vs LDLC ASVEL Villeurbanne (Feb 11)",
-  },
-  {
-    team: "LDLC ASVEL Villeurbanne",
-    wins: 5,
-    losses: 10,
-    winPct: 0.333,
-    sos: 6.8,
-    sosu: 7.1,
-    effFG: { value: 46.8, rank: 14 },
-    to: { value: 18.9, rank: 15 },
-    offReb: { value: 27.2, rank: 14 },
-    ftaFga: { value: 30.1, rank: 13 },
-    defEffFG: { value: 53.8, rank: 13 },
-    defTO: { value: 13.2, rank: 14 },
-    defOffReb: { value: 33.5, rank: 14 },
-    defFtaFga: { value: 36.2, rank: 14 },
-    upcomingGame: "at ALBA Berlin (Feb 11)",
-  },
-  {
-    team: "Zalgiris Kaunas",
-    wins: 5,
-    losses: 10,
-    winPct: 0.333,
-    sos: 7.1,
-    sosu: 6.9,
-    effFG: { value: 46.2, rank: 15 },
-    to: { value: 17.8, rank: 11 },
-    offReb: { value: 28.1, rank: 13 },
-    ftaFga: { value: 29.5, rank: 15 },
-    defEffFG: { value: 54.2, rank: 15 },
-    defTO: { value: 12.8, rank: 15 },
-    defOffReb: { value: 34.1, rank: 15 },
-    defFtaFga: { value: 36.8, rank: 15 },
-    upcomingGame: "vs Crvena Zvezda Meridianbet Belgrade (Feb 11)",
-  },
-  {
-    team: "Crvena Zvezda Meridianbet Belgrade",
-    wins: 4,
-    losses: 11,
-    winPct: 0.267,
-    sos: 6.5,
-    sosu: 6.7,
-    effFG: { value: 45.7, rank: 16 },
-    to: { value: 18.2, rank: 12 },
-    offReb: { value: 26.8, rank: 16 },
-    ftaFga: { value: 28.9, rank: 16 },
-    defEffFG: { value: 54.7, rank: 16 },
-    defTO: { value: 12.5, rank: 16 },
-    defOffReb: { value: 34.8, rank: 16 },
-    defFtaFga: { value: 37.2, rank: 16 },
-    upcomingGame: "at Zalgiris Kaunas (Feb 11)",
-  },
-  {
-    team: "Anadolu Efes Istanbul",
-    wins: 4,
-    losses: 11,
-    winPct: 0.267,
-    sos: 6.3,
-    sosu: 6.5,
-    effFG: { value: 45.1, rank: 17 },
-    to: { value: 18.5, rank: 13 },
-    offReb: { value: 25.9, rank: 17 },
-    ftaFga: { value: 28.3, rank: 17 },
-    defEffFG: { value: 55.1, rank: 17 },
-    defTO: { value: 12.1, rank: 17 },
-    defOffReb: { value: 35.2, rank: 17 },
-    defFtaFga: { value: 37.8, rank: 17 },
-    upcomingGame: "vs Partizan Mozzart Bet Belgrade (Feb 11)",
-  },
-  {
-    team: "Partizan Mozzart Bet Belgrade",
-    wins: 3,
-    losses: 12,
-    winPct: 0.2,
-    sos: 6.1,
-    sosu: 6.3,
-    effFG: { value: 44.5, rank: 18 },
-    to: { value: 19.5, rank: 17 },
-    offReb: { value: 25.2, rank: 18 },
-    ftaFga: { value: 27.8, rank: 18 },
-    defEffFG: { value: 55.8, rank: 18 },
-    defTO: { value: 11.8, rank: 18 },
-    defOffReb: { value: 35.9, rank: 18 },
-    defFtaFga: { value: 38.5, rank: 18 },
-    upcomingGame: "at Anadolu Efes Istanbul (Feb 11)",
-  },
-  {
-    team: "Paris Basketball",
-    wins: 7,
-    losses: 8,
-    winPct: 0.467,
-    sos: 7.9,
-    sosu: 7.6,
-    effFG: { value: 52.8, rank: 6 },
-    to: { value: 17.2, rank: 10 },
-    offReb: { value: 31.8, rank: 6 },
-    ftaFga: { value: 34.2, rank: 8 },
-    defEffFG: { value: 50.8, rank: 11 },
-    defTO: { value: 14.5, rank: 12 },
-    defOffReb: { value: 32.5, rank: 13 },
-    defFtaFga: { value: 35.5, rank: 13 },
-    upcomingGame: "vs Maccabi Playtika Tel Aviv (Feb 11)",
-  },
-  {
-    team: "Maccabi Playtika Tel Aviv",
-    wins: 8,
-    losses: 7,
-    winPct: 0.533,
-    sos: 7.4,
-    sosu: 7.8,
-    effFG: { value: 53.2, rank: 3 },
-    to: { value: 15.1, rank: 5 },
-    offReb: { value: 32.2, rank: 5 },
-    ftaFga: { value: 35.8, rank: 7 },
-    defEffFG: { value: 49.5, rank: 10 },
-    defTO: { value: 15.1, rank: 11 },
-    defOffReb: { value: 31.2, rank: 12 },
-    defFtaFga: { value: 34.8, rank: 12 },
-    upcomingGame: "at Paris Basketball (Feb 11)",
-  },
-]
+  const leagueStandings = [
+    {
+      team: "Real Madrid",
+      wins: 12,
+      losses: 3,
+      winPct: 0.8,
+      sos: 8.2,
+      sosu: 9.1,
+      effFG: { value: 56.2, rank: 1 },
+      to: { value: 13.8, rank: 2 },
+      offReb: { value: 33.5, rank: 4 },
+      ftaFga: { value: 35.2, rank: 7 },
+      defEffFG: { value: 45.1, rank: 2 },
+      defTO: { value: 18.7, rank: 3 },
+      defOffReb: { value: 27.3, rank: 5 },
+      defFtaFga: { value: 29.8, rank: 4 },
+      upcomingGame: "vs Fenerbahce Beko Istanbul (Feb 11)",
+    },
+    {
+      team: "FC Barcelona",
+      wins: 11,
+      losses: 4,
+      winPct: 0.733,
+      sos: 7.5,
+      sosu: 8.7,
+      effFG: { value: 54.1, rank: 5 },
+      to: { value: 14.2, rank: 3 },
+      offReb: { value: 35.8, rank: 1 },
+      ftaFga: { value: 37.9, rank: 3 },
+      defEffFG: { value: 46.3, rank: 4 },
+      defTO: { value: 17.9, rank: 5 },
+      defOffReb: { value: 28.1, rank: 7 },
+      defFtaFga: { value: 30.5, rank: 6 },
+      upcomingGame: "at Baskonia Vitoria-Gasteiz (Feb 11)",
+    },
+    {
+      team: "Olympiacos Piraeus",
+      wins: 10,
+      losses: 5,
+      winPct: 0.667,
+      sos: 9.3,
+      sosu: 8.5,
+      effFG: { value: 55.3, rank: 2 },
+      to: { value: 14.9, rank: 4 },
+      offReb: { value: 31.2, rank: 8 },
+      ftaFga: { value: 38.7, rank: 5 },
+      defEffFG: { value: 44.8, rank: 1 },
+      defTO: { value: 19.2, rank: 2 },
+      defOffReb: { value: 26.8, rank: 3 },
+      defFtaFga: { value: 30.4, rank: 5 },
+      upcomingGame: "at Virtus Segafredo Bologna (Feb 11)",
+    },
+    {
+      team: "Fenerbahce Beko Istanbul",
+      wins: 10,
+      losses: 5,
+      winPct: 0.667,
+      sos: 8.8,
+      sosu: 7.9,
+      effFG: { value: 53.8, rank: 4 },
+      to: { value: 17.5, rank: 10 },
+      offReb: { value: 34.1, rank: 3 },
+      ftaFga: { value: 40.2, rank: 1 },
+      defEffFG: { value: 47.2, rank: 6 },
+      defTO: { value: 16.8, rank: 7 },
+      defOffReb: { value: 29.5, rank: 9 },
+      defFtaFga: { value: 31.7, rank: 8 },
+      upcomingGame: "at Real Madrid (Feb 11)",
+    },
+    {
+      team: "Baskonia Vitoria-Gasteiz",
+      wins: 9,
+      losses: 6,
+      winPct: 0.6,
+      sos: 9.1,
+      sosu: 9.4,
+      effFG: { value: 51.2, rank: 8 },
+      to: { value: 13.5, rank: 1 },
+      offReb: { value: 28.7, rank: 12 },
+      ftaFga: { value: 34.8, rank: 8 },
+      defEffFG: { value: 46.8, rank: 5 },
+      defTO: { value: 19.5, rank: 1 },
+      defOffReb: { value: 26.5, rank: 2 },
+      defFtaFga: { value: 28.9, rank: 2 },
+      upcomingGame: "vs FC Barcelona (Feb 11)",
+    },
+    {
+      team: "Virtus Segafredo Bologna",
+      wins: 9,
+      losses: 6,
+      winPct: 0.6,
+      sos: 7.8,
+      sosu: 8.3,
+      effFG: { value: 50.8, rank: 9 },
+      to: { value: 16.9, rank: 9 },
+      offReb: { value: 34.9, rank: 2 },
+      ftaFga: { value: 39.1, rank: 2 },
+      defEffFG: { value: 48.5, rank: 8 },
+      defTO: { value: 16.2, rank: 8 },
+      defOffReb: { value: 30.2, rank: 10 },
+      defFtaFga: { value: 32.3, rank: 9 },
+      upcomingGame: "vs Olympiacos Piraeus (Feb 11)",
+    },
+    {
+      team: "FC Bayern Munich",
+      wins: 8,
+      losses: 7,
+      winPct: 0.533,
+      sos: 6.9,
+      sosu: 7.5,
+      effFG: { value: 48.5, rank: 11 },
+      to: { value: 15.8, rank: 7 },
+      offReb: { value: 26.3, rank: 15 },
+      ftaFga: { value: 31.2, rank: 11 },
+      defEffFG: { value: 49.1, rank: 9 },
+      defTO: { value: 15.5, rank: 10 },
+      defOffReb: { value: 31.8, rank: 12 },
+      defFtaFga: { value: 33.5, rank: 11 },
+      upcomingGame: "at Olympiacos Piraeus (Feb 18)",
+    },
+    {
+      team: "Panathinaikos AKTOR Athens",
+      wins: 8,
+      losses: 7,
+      winPct: 0.533,
+      sos: 7.2,
+      sosu: 8.1,
+      effFG: { value: 52.1, rank: 7 },
+      to: { value: 18.7, rank: 14 },
+      offReb: { value: 30.8, rank: 9 },
+      ftaFga: { value: 36.5, rank: 6 },
+      defEffFG: { value: 47.9, rank: 7 },
+      defTO: { value: 15.9, rank: 9 },
+      defOffReb: { value: 28.9, rank: 8 },
+      defFtaFga: { value: 32.8, rank: 10 },
+      upcomingGame: "vs Olympiacos Piraeus (Feb 11)",
+    },
+    {
+      team: "AS Monaco",
+      wins: 7,
+      losses: 8,
+      winPct: 0.467,
+      sos: 8.5,
+      sosu: 7.8,
+      effFG: { value: 49.2, rank: 10 },
+      to: { value: 15.3, rank: 6 },
+      offReb: { value: 29.5, rank: 10 },
+      ftaFga: { value: 32.8, rank: 10 },
+      defEffFG: { value: 50.2, rank: 10 },
+      defTO: { value: 14.8, rank: 11 },
+      defOffReb: { value: 30.5, rank: 11 },
+      defFtaFga: { value: 34.2, rank: 12 },
+      upcomingGame: "at Olympiacos Piraeus (Feb 25)",
+    },
+    {
+      team: "EA7 Emporio Armani Milan",
+      wins: 6,
+      losses: 9,
+      winPct: 0.4,
+      sos: 8.9,
+      sosu: 8.2,
+      effFG: { value: 47.3, rank: 13 },
+      to: { value: 19.2, rank: 16 },
+      offReb: { value: 30.5, rank: 7 },
+      ftaFga: { value: 29.8, rank: 14 },
+      defEffFG: { value: 51.5, rank: 11 },
+      defTO: { value: 14.2, rank: 12 },
+      defOffReb: { value: 32.1, rank: 13 },
+      defFtaFga: { value: 35.1, rank: 13 },
+      upcomingGame: "at Fenerbahce Beko Istanbul (Feb 11)",
+    },
+    {
+      team: "ALBA Berlin",
+      wins: 6,
+      losses: 9,
+      winPct: 0.4,
+      sos: 7.6,
+      sosu: 7.3,
+      effFG: { value: 48.9, rank: 12 },
+      to: { value: 16.5, rank: 8 },
+      offReb: { value: 29.1, rank: 11 },
+      ftaFga: { value: 33.5, rank: 9 },
+      defEffFG: { value: 52.3, rank: 12 },
+      defTO: { value: 13.9, rank: 13 },
+      defOffReb: { value: 27.8, rank: 6 },
+      defFtaFga: { value: 29.5, rank: 3 },
+      upcomingGame: "vs LDLC ASVEL Villeurbanne (Feb 11)",
+    },
+    {
+      team: "LDLC ASVEL Villeurbanne",
+      wins: 5,
+      losses: 10,
+      winPct: 0.333,
+      sos: 6.8,
+      sosu: 7.1,
+      effFG: { value: 46.8, rank: 14 },
+      to: { value: 18.9, rank: 15 },
+      offReb: { value: 27.2, rank: 14 },
+      ftaFga: { value: 30.1, rank: 13 },
+      defEffFG: { value: 53.8, rank: 13 },
+      defTO: { value: 13.2, rank: 14 },
+      defOffReb: { value: 33.5, rank: 14 },
+      defFtaFga: { value: 36.2, rank: 14 },
+      upcomingGame: "at ALBA Berlin (Feb 11)",
+    },
+    {
+      team: "Zalgiris Kaunas",
+      wins: 5,
+      losses: 10,
+      winPct: 0.333,
+      sos: 7.1,
+      sosu: 6.9,
+      effFG: { value: 46.2, rank: 15 },
+      to: { value: 17.8, rank: 11 },
+      offReb: { value: 28.1, rank: 13 },
+      ftaFga: { value: 29.5, rank: 15 },
+      defEffFG: { value: 54.2, rank: 15 },
+      defTO: { value: 12.8, rank: 15 },
+      defOffReb: { value: 34.1, rank: 15 },
+      defFtaFga: { value: 36.8, rank: 15 },
+      upcomingGame: "vs Crvena Zvezda Meridianbet Belgrade (Feb 11)",
+    },
+    {
+      team: "Crvena Zvezda Meridianbet Belgrade",
+      wins: 4,
+      losses: 11,
+      winPct: 0.267,
+      sos: 6.5,
+      sosu: 6.7,
+      effFG: { value: 45.7, rank: 16 },
+      to: { value: 18.2, rank: 12 },
+      offReb: { value: 26.8, rank: 16 },
+      ftaFga: { value: 28.9, rank: 16 },
+      defEffFG: { value: 54.7, rank: 16 },
+      defTO: { value: 12.5, rank: 16 },
+      defOffReb: { value: 34.8, rank: 16 },
+      defFtaFga: { value: 37.2, rank: 16 },
+      upcomingGame: "at Zalgiris Kaunas (Feb 11)",
+    },
+    {
+      team: "Anadolu Efes Istanbul",
+      wins: 4,
+      losses: 11,
+      winPct: 0.267,
+      sos: 6.3,
+      sosu: 6.5,
+      effFG: { value: 45.1, rank: 17 },
+      to: { value: 18.5, rank: 13 },
+      offReb: { value: 25.9, rank: 17 },
+      ftaFga: { value: 28.3, rank: 17 },
+      defEffFG: { value: 55.1, rank: 17 },
+      defTO: { value: 12.1, rank: 17 },
+      defOffReb: { value: 35.2, rank: 17 },
+      defFtaFga: { value: 37.8, rank: 17 },
+      upcomingGame: "vs Partizan Mozzart Bet Belgrade (Feb 11)",
+    },
+    {
+      team: "Partizan Mozzart Bet Belgrade",
+      wins: 3,
+      losses: 12,
+      winPct: 0.2,
+      sos: 6.1,
+      sosu: 6.3,
+      effFG: { value: 44.5, rank: 18 },
+      to: { value: 19.5, rank: 17 },
+      offReb: { value: 25.2, rank: 18 },
+      ftaFga: { value: 27.8, rank: 18 },
+      defEffFG: { value: 55.8, rank: 18 },
+      defTO: { value: 11.8, rank: 18 },
+      defOffReb: { value: 35.9, rank: 18 },
+      defFtaFga: { value: 38.5, rank: 18 },
+      upcomingGame: "at Anadolu Efes Istanbul (Feb 11)",
+    },
+    {
+      team: "Paris Basketball",
+      wins: 7,
+      losses: 8,
+      winPct: 0.467,
+      sos: 7.9,
+      sosu: 7.6,
+      effFG: { value: 52.8, rank: 6 },
+      to: { value: 17.2, rank: 10 },
+      offReb: { value: 31.8, rank: 6 },
+      ftaFga: { value: 34.2, rank: 8 },
+      defEffFG: { value: 50.8, rank: 11 },
+      defTO: { value: 14.5, rank: 12 },
+      defOffReb: { value: 32.5, rank: 13 },
+      defFtaFga: { value: 35.5, rank: 13 },
+      upcomingGame: "vs Maccabi Playtika Tel Aviv (Feb 11)",
+    },
+    {
+      team: "Maccabi Playtika Tel Aviv",
+      wins: 8,
+      losses: 7,
+      winPct: 0.533,
+      sos: 7.4,
+      sosu: 7.8,
+      effFG: { value: 53.2, rank: 3 },
+      to: { value: 15.1, rank: 5 },
+      offReb: { value: 32.2, rank: 5 },
+      ftaFga: { value: 35.8, rank: 7 },
+      defEffFG: { value: 49.5, rank: 10 },
+      defTO: { value: 15.1, rank: 11 },
+      defOffReb: { value: 31.2, rank: 12 },
+      defFtaFga: { value: 34.8, rank: 12 },
+      upcomingGame: "at Paris Basketball (Feb 11)",
+    },
+  ]
 
   // Sample box score data for all games
   const mockBoxScoreData = {
@@ -1758,53 +1763,51 @@ const leagueStandings = [
   // Add this function before the return statement
   // Find the renderTeamLogos function and replace it with this updated version
   // that removes team names from each cell and makes logos larger
-const renderTeamLogos = useMemo(() => {
-  // Get all team names from the teamNameToCode object
-  const teamNames = Object.keys(teamNameToCode);
+  const renderTeamLogos = useMemo(() => {
+    // Get all team names from the teamNameToCode object
+    const teamNames = Object.keys(teamNameToCode)
 
-  return (
-    <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-1 border border-gray-300 shadow-sm mb-1 w-full">
-      <div className="flex flex-wrap gap-2 justify-center">
-        {teamNames.map((teamName) => {
-          const teamCode = teamNameToCode[teamName];
-          const logoUrl = team_logo_mapping_2024_2025[teamCode];
+    return (
+      <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-1 border border-gray-300 shadow-sm mb-1 w-full">
+        <div className="flex flex-wrap gap-2 justify-center">
+          {teamNames.map((teamName) => {
+            const teamCode = teamNameToCode[teamName]
+            const logoUrl = team_logo_mapping_2024_2025[teamCode]
 
-          return (
-            <button
-              key={teamName}
-              onClick={() => setSelectedTeam(teamName)}
-              className={`flex items-center justify-center p-1.5 rounded-lg transition-all ${
-                teamName === selectedTeam
-                  ? "bg-blue-500/10 border-2 border-blue-400 shadow-sm" 
-                  : "bg-white/70 border border-gray-300 hover:bg-gray-100 hover:border-gray-400"
-              } flex-shrink-0`}
-              title={teamName}
-            >
-              <div className="w-10 h-10 flex items-center justify-center bg-white rounded-md p-0.5">
-                {logoUrl ? (
-                  <img
-                    src={logoUrl || "/placeholder.svg"}
-                    alt={`${teamName} logo`}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-md flex items-center justify-center text-white font-bold text-xs bg-gray-400">
-                    {teamName
-                      .split(" ")
-                      .map((word) => word[0])
-                      .join("")}
-                  </div>
-                )}
-              </div>
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={teamName}
+                onClick={() => setSelectedTeam(teamName)}
+                className={`flex items-center justify-center p-1.5 rounded-lg transition-all ${
+                  teamName === selectedTeam
+                    ? "bg-blue-500/10 border-2 border-blue-400 shadow-sm"
+                    : "bg-white/70 border border-gray-300 hover:bg-gray-100 hover:border-gray-400"
+                } flex-shrink-0`}
+                title={teamName}
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white rounded-md p-0.5">
+                  {logoUrl ? (
+                    <img
+                      src={logoUrl || "/placeholder.svg"}
+                      alt={`${teamName} logo`}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-md flex items-center justify-center text-white font-bold text-xs bg-gray-400">
+                      {teamName
+                        .split(" ")
+                        .map((word) => word[0])
+                        .join("")}
+                    </div>
+                  )}
+                </div>
+              </button>
+            )
+          })}
+        </div>
       </div>
-    </div>
-  );
-}, [selectedTeam, setSelectedTeam]);
-
-
+    )
+  }, [selectedTeam, setSelectedTeam])
 
   // Update the league standings table styling
   return (
@@ -2093,191 +2096,210 @@ const renderTeamLogos = useMemo(() => {
             <>
               {/* Team logos row - now at the top level of the tab content */}
 
-              
-{/* Team header row - containing both team info and logos grid */}
-<div className="flex flex-col gap-4 mb-4 w-full">
-  {/* Team logos container - Now with very small gap and rounded edges */}
-  <div className="flex w-full gap-0.5">
-    {Object.keys(teamNameToCode).map((teamName) => {
-      const teamCode = teamNameToCode[teamName];
-      const logoUrl = team_logo_mapping_2024_2025[teamCode];
-      const isSelected = teamName === selectedTeam;
+              {/* Team header row - containing both team info and logos grid */}
+              <div className="flex flex-col gap-4 mb-4 w-full">
+                {/* Team logos container - Now with very small gap and rounded edges */}
+                <div className="flex w-full gap-0.5">
+                  {Object.keys(teamNameToCode).map((teamName) => {
+                    const teamCode = teamNameToCode[teamName]
+                    const logoUrl = team_logo_mapping_2024_2025[teamCode]
+                    const isSelected = teamName === selectedTeam
 
-      return (
-        <button
-          key={teamName}
-          onClick={() => setSelectedTeam(teamName)}
-          className="focus:outline-none transition-all duration-200 flex-1"
-          title={teamName}
-        >
-          <div 
-            className={`w-full aspect-square flex items-center justify-center bg-white rounded-md
-              ${isSelected 
-                ? "border-2 border-blue-600 shadow-md" 
-                : "border border-gray-300 hover:border-gray-500 hover:shadow-sm"
+                    return (
+                      <button
+                        key={teamName}
+                        onClick={() => setSelectedTeam(teamName)}
+                        className="focus:outline-none transition-all duration-200 flex-1"
+                        title={teamName}
+                      >
+                        <div
+                          className={`w-full aspect-square flex items-center justify-center bg-white rounded-md
+              ${
+                isSelected
+                  ? "border-2 border-blue-600 shadow-md"
+                  : "border border-gray-300 hover:border-gray-500 hover:shadow-sm"
               } 
               transition-all p-1`}
-          >
-            {logoUrl ? (
-              <img
-                src={logoUrl || "/placeholder.svg"}
-                alt={`${teamName} logo`}
-                className={`max-w-full max-h-full object-contain transition-all duration-200 ${isSelected ? "" : "opacity-40 filter grayscale"}`}
-              />
-            ) : (
-              <div className={`w-full h-full rounded-sm flex items-center justify-center text-white font-bold text-xs ${isSelected ? "bg-gray-600" : "bg-gray-400 opacity-60"}`}>
-                {teamName
-                  .split(" ")
-                  .map((word) => word[0])
-                  .join("")}
-              </div>
-            )}
-          </div>
-        </button>
-      );
-    })}
-  </div>
+                        >
+                          {logoUrl ? (
+                            <img
+                              src={logoUrl || "/placeholder.svg"}
+                              alt={`${teamName} logo`}
+                              className={`max-w-full max-h-full object-contain transition-all duration-200 ${isSelected ? "" : "opacity-40 filter grayscale"}`}
+                            />
+                          ) : (
+                            <div
+                              className={`w-full h-full rounded-sm flex items-center justify-center text-white font-bold text-xs ${isSelected ? "bg-gray-600" : "bg-gray-400 opacity-60"}`}
+                            >
+                              {teamName
+                                .split(" ")
+                                .map((word) => word[0])
+                                .join("")}
+                            </div>
+                          )}
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
 
-  {/* Compact team header container with border around entire box */}
-  <div 
-    className="rounded-lg overflow-hidden shadow-sm w-full bg-white"
-    style={{ 
-      border: `2px solid ${getTeamColorStyles(selectedTeam).backgroundColor}`
-    }}
-  >
-    <div className="flex items-center p-2">
-      {/* Team Logo and Name section with 45% width */}
-      <div className="flex items-center w-[45%] flex-shrink-0 border-r border-gray-200 pr-2">
-        {/* Team Logo - smaller size */}
-        <div className="flex-shrink-0 mr-2">
-          {(() => {
-            const teamCode = teamNameToCode[selectedTeam];
-            const selectedLogoUrl = team_logo_mapping_2024_2025[teamCode];
-            const teamColor = getTeamColorStyles(selectedTeam).backgroundColor;
-            
-            return selectedLogoUrl ? (
-              <div 
-                className="w-8 h-8 flex items-center justify-center rounded-md shadow-sm" 
-                style={{
-                  background: `linear-gradient(135deg, ${teamColor}, ${teamColor}90)`,
-                  border: '1px solid rgba(0,0,0,0.1)'
-                }}
-              >
-                <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center p-0.5 shadow-sm">
-                  <img
-                    src={selectedLogoUrl || "/placeholder.svg"}
-                    alt={`${selectedTeam} logo`}
-                    className="w-5 h-5 object-contain"
+                {/* Compact team header container with border around entire box */}
+                <div
+                  className="rounded-lg overflow-hidden shadow-sm w-full bg-white"
+                  style={{
+                    border: `2px solid ${getTeamColorStyles(selectedTeam).backgroundColor}`,
+                  }}
+                >
+                  <div className="flex items-center p-2">
+                    {/* Team Logo and Name section with 45% width */}
+                    <div className="flex items-center w-[45%] flex-shrink-0 border-r border-gray-200 pr-2">
+                      {/* Team Logo - smaller size */}
+                      <div className="flex-shrink-0 mr-2">
+                        {(() => {
+                          const teamCode = teamNameToCode[selectedTeam]
+                          const selectedLogoUrl = team_logo_mapping_2024_2025[teamCode]
+                          const teamColor = getTeamColorStyles(selectedTeam).backgroundColor
+
+                          return selectedLogoUrl ? (
+                            <div
+                              className="w-8 h-8 flex items-center justify-center rounded-md shadow-sm"
+                              style={{
+                                background: `linear-gradient(135deg, ${teamColor}, ${teamColor}90)`,
+                                border: "1px solid rgba(0,0,0,0.1)",
+                              }}
+                            >
+                              <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center p-0.5 shadow-sm">
+                                <img
+                                  src={selectedLogoUrl || "/placeholder.svg"}
+                                  alt={`${selectedTeam} logo`}
+                                  className="w-5 h-5 object-contain"
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <div
+                              className="w-8 h-8 rounded-md flex items-center justify-center text-white font-bold text-xs shadow-sm"
+                              style={{
+                                background: `linear-gradient(135deg, ${teamColor}, ${teamColor}90)`,
+                                border: "1px solid rgba(0,0,0,0.1)",
+                              }}
+                            >
+                              {selectedTeam
+                                .split(" ")
+                                .map((word) => word[0])
+                                .join("")}
+                            </div>
+                          )
+                        })()}
+                      </div>
+
+                      {/* Team Name - in larger container */}
+                      <div className="overflow-hidden flex-grow">
+                        <h2 className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis text-black">
+                          {selectedTeam}
+                        </h2>
+                      </div>
+                    </div>
+
+                    {/* Stats in a single row - now takes 55% of space with minimal spacing */}
+                    <div className="flex items-center w-[55%] text-xs pl-2 gap-1 justify-between">
+                      {/* Position */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">Pos:</span>
+                        <span
+                          className="px-1 py-0.5 rounded font-medium border"
+                          style={{
+                            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
+                            color: "#1a202c",
+                            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`,
+                          }}
+                        >
+                          {leagueStandings
+                            .sort((a, b) => b.winPct - a.winPct)
+                            .findIndex((team) => team.team === selectedTeam) + 1}
+                        </span>
+                      </div>
+
+                      {/* Record */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">Rec:</span>
+                        <span
+                          className="px-1 py-0.5 rounded font-mono border"
+                          style={{
+                            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
+                            color: "#1a202c",
+                            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`,
+                          }}
+                        >
+                          {leagueStandings.find((team) => team.team === selectedTeam)?.wins || 0}-
+                          {leagueStandings.find((team) => team.team === selectedTeam)?.losses || 0}
+                        </span>
+                      </div>
+
+                      {/* Home Record */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">H:</span>
+                        <span
+                          className="px-1 py-0.5 rounded font-mono border"
+                          style={{
+                            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
+                            color: "#1a202c",
+                            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`,
+                          }}
+                        >
+                          7-2
+                        </span>
+                      </div>
+
+                      {/* Away Record */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">A:</span>
+                        <span
+                          className="px-1 py-0.5 rounded font-mono border"
+                          style={{
+                            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
+                            color: "#1a202c",
+                            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`,
+                          }}
+                        >
+                          5-3
+                        </span>
+                      </div>
+
+                      {/* Streak */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">Strk:</span>
+                        <span className="px-1 py-0.5 bg-red-100 text-red-800 rounded font-medium border border-red-200">
+                          L5
+                        </span>
+                      </div>
+
+                      {/* Next Game */}
+                      <div className="flex items-center whitespace-nowrap">
+                        <span className="font-medium mr-0.5 text-gray-700">Next:</span>
+                        <span
+                          className="px-1 py-0.5 rounded text-gray-800 border"
+                          style={{
+                            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
+                            color: "#1a202c",
+                            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`,
+                          }}
+                        >
+                          FEN
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Colored footer strip */}
+                  <div
+                    className="w-full h-1"
+                    style={{
+                      backgroundColor: getTeamColorStyles(selectedTeam).backgroundColor,
+                    }}
                   />
                 </div>
               </div>
-            ) : (
-              <div 
-                className="w-8 h-8 rounded-md flex items-center justify-center text-white font-bold text-xs shadow-sm" 
-                style={{
-                  background: `linear-gradient(135deg, ${teamColor}, ${teamColor}90)`,
-                  border: '1px solid rgba(0,0,0,0.1)'
-                }}
-              >
-                {selectedTeam
-                  .split(" ")
-                  .map((word) => word[0])
-                  .join("")}
-              </div>
-            );
-          })()}
-        </div>
-        
-        {/* Team Name - in larger container */}
-        <div className="overflow-hidden flex-grow">
-          <h2 className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis text-black">
-            {selectedTeam}
-          </h2>
-        </div>
-      </div>
-      
-      {/* Stats in a single row - now takes 55% of space with minimal spacing */}
-      <div className="flex items-center w-[55%] text-xs pl-2 gap-1 justify-between">
-        {/* Position */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">Pos:</span>
-          <span className="px-1 py-0.5 rounded font-medium border" style={{
-            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
-            color: '#1a202c',
-            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`
-          }}>
-            {leagueStandings.sort((a, b) => b.winPct - a.winPct).findIndex(team => team.team === selectedTeam) + 1}
-          </span>
-        </div>
-        
-        {/* Record */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">Rec:</span>
-          <span className="px-1 py-0.5 rounded font-mono border" style={{
-            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
-            color: '#1a202c',
-            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`
-          }}>
-            {leagueStandings.find(team => team.team === selectedTeam)?.wins || 0}-{leagueStandings.find(team => team.team === selectedTeam)?.losses || 0}
-          </span>
-        </div>
-        
-        {/* Home Record */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">H:</span>
-          <span className="px-1 py-0.5 rounded font-mono border" style={{
-            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
-            color: '#1a202c',
-            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`
-          }}>
-            7-2
-          </span>
-        </div>
-        
-        {/* Away Record */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">A:</span>
-          <span className="px-1 py-0.5 rounded font-mono border" style={{
-            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
-            color: '#1a202c',
-            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`
-          }}>
-            5-3
-          </span>
-        </div>
-        
-        {/* Streak */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">Strk:</span>
-          <span className="px-1 py-0.5 bg-red-100 text-red-800 rounded font-medium border border-red-200">
-            L5
-          </span>
-        </div>
-        
-        {/* Next Game */}
-        <div className="flex items-center whitespace-nowrap">
-          <span className="font-medium mr-0.5 text-gray-700">Next:</span>
-          <span className="px-1 py-0.5 rounded text-gray-800 border" style={{
-            backgroundColor: `${getTeamColorStyles(selectedTeam).backgroundColor}15`,
-            color: '#1a202c',
-            borderColor: `${getTeamColorStyles(selectedTeam).backgroundColor}40`
-          }}>
-            FEN
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    {/* Colored footer strip */}
-    <div 
-      className="w-full h-1"
-      style={{ 
-        backgroundColor: getTeamColorStyles(selectedTeam).backgroundColor
-      }}
-    />
-  </div>
-</div>
-              
 
               {/* Rest of the code remains unchanged */}
               <div className="flex flex-col lg:flex-row gap-4 h-full">
@@ -2286,9 +2308,7 @@ const renderTeamLogos = useMemo(() => {
                   <div className="bg-white rounded-md p-3 pb-1 border shadow-lg flex-1 flex flex-col overflow-y-auto">
                     <div className="flex justify-between items-center border-b-2 border-gray-800 pb-2">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-md font-semibold flex items-center">
-                          Team Report 
-                        </h3>
+                        <h3 className="text-md font-semibold flex items-center">Team Report</h3>
                       </div>
                       {/* Team filter dropdown removed */}
                     </div>
@@ -2311,7 +2331,9 @@ const renderTeamLogos = useMemo(() => {
                               <th className="text-center py-.5 px-2 font-medium text-red-700 border-l border-gray-300">
                                 Defense
                               </th>
-                              <th className="text-center py-.5 pl-2 font-medium border-l border-gray-300">League Avg</th>
+                              <th className="text-center py-.5 pl-2 font-medium border-l border-gray-300">
+                                League Avg
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -2585,7 +2607,9 @@ const renderTeamLogos = useMemo(() => {
 
                         {/* Replace the "POINT DISTRIBUTION" subheader with: */}
                         <div className="mt-3 mb-1">
-                          <div className="text-gray-800 font-medium uppercase text-center text-sm">POINT DISTRIBUTION</div>
+                          <div className="text-gray-800 font-medium uppercase text-center text-sm">
+                            POINT DISTRIBUTION
+                          </div>
                           <div className="h-1 w-full bg-slate-700 mt-1"></div>
                         </div>
                         <table className="w-full text-xs border-collapse mb-5">
@@ -2655,7 +2679,9 @@ const renderTeamLogos = useMemo(() => {
 
                         {/* Replace the "STRENGTH OF SCHEDULE" subheader with: */}
                         <div className="mt-3 mb-1">
-                          <div className="text-gray-800 font-medium uppercase text-center text-sm">STRENGTH OF SCHEDULE</div>
+                          <div className="text-gray-800 font-medium uppercase text-center text-sm">
+                            STRENGTH OF SCHEDULE
+                          </div>
                           <div className="h-1 w-full bg-slate-700 mt-1"></div>
                         </div>
                         <table className="w-full text-xs border-collapse mb-5">
@@ -2687,14 +2713,15 @@ const renderTeamLogos = useMemo(() => {
                 <div className="lg:w-7/12 flex flex-col">
                   <div className="bg-white rounded-md p-3 border shadow-lg flex flex-col">
                     <div className="flex justify-between items-center border-b-2 border-gray-800 pb-2">
-                      <h3 className="text-md font-semibold flex items-center">
-                        Schedule & Results
-                      </h3>
+                      <h3 className="text-md font-semibold flex items-center">Schedule & Results</h3>
                       <div className="text-sm text-muted-foreground"></div>
                     </div>
 
                     {/* This div will have fixed height and scrolling */}
-                    <div className="h-[837px] max-h-[837px] overflow-y-auto overflow-x-auto w-full" style={{ height: '837px', maxHeight: '837px', overflowY: 'auto' }}>
+                    <div
+                      className="h-[837px] max-h-[837px] overflow-y-auto overflow-x-auto w-full"
+                      style={{ height: "837px", maxHeight: "837px", overflowY: "auto" }}
+                    >
                       <table className="w-full text-xs border-collapse">
                         <colgroup>
                           <col className="w-[12%]" />
@@ -3073,16 +3100,19 @@ const renderTeamLogos = useMemo(() => {
                                   <td className="py-1 px-1 border-r border-gray-200">{game.date}</td>
                                   <td className="py-1 px-1 text-center border-r border-gray-200">{game.rank}</td>
                                   <td className="py-1 px-1 border-r border-gray-200">
-                                    {getTeamLogo(game.opponent)}
-                                    {game.opponent}
+                                    {/* Opponent with logo */}
+                                    <div className="flex items-center">
+                                      {getTeamLogo(game.opponent)}
+                                      {game.opponent}
+                                    </div>
                                   </td>
                                   <td
-                                    className={`py-1 px-1 text-center border-r border-gray-200 ${
-                                      game.isWin === true
-                                        ? "text-green-600 font-medium"
-                                        : game.isWin === false
-                                          ? "text-red-600 font-medium"
-                                          : ""
+                                    className={`py-1 px-1 text-center border-r border-gray-200 font-mono ${
+                                      game.isCompleted
+                                        ? game.isWin
+                                          ? "text-green-600 font-semibold"
+                                          : "text-red-600 font-semibold"
+                                        : "text-gray-500"
                                     }`}
                                   >
                                     {game.result}
@@ -3093,12 +3123,12 @@ const renderTeamLogos = useMemo(() => {
                                     {game.isCompleted ? (
                                       <button
                                         onClick={() => toggleBoxScore(index)}
-                                        className="hover:underline text-blue-500"
+                                        className="p-1 rounded-md hover:bg-gray-100 transition-colors"
                                       >
                                         {expandedGameIndex === index ? (
-                                          <ChevronDown className="h-4 w-4 inline-block" />
+                                          <ArrowUp className="h-4 w-4" />
                                         ) : (
-                                          "View"
+                                          <ArrowDown className="h-4 w-4" />
                                         )}
                                       </button>
                                     ) : (
@@ -3106,10 +3136,23 @@ const renderTeamLogos = useMemo(() => {
                                     )}
                                   </td>
                                 </tr>
+                                {/* Conditionally render the box score */}
                                 {expandedGameIndex === index && (
                                   <tr>
-                                    <td colSpan={7} className="p-0">
-                                      <DetailedBoxScore boxScore={mockBoxScoreData} />
+                                    <td colSpan={7} className="p-3">
+                                      {/* Box score content here */}
+                                      <div className="bg-gray-50 rounded-md p-3">
+                                        <h4 className="font-semibold text-sm mb-2">Box Score</h4>
+                                        {/* Display box score data here */}
+                                        <p className="text-xs">
+                                          {mockBoxScoreData.gameDate}, {mockBoxScoreData.gameTime} at{" "}
+                                          {mockBoxScoreData.venue}
+                                        </p>
+                                        <p className="text-xs">
+                                          {mockBoxScoreData.homeTeam.name}:{" "}
+                                          {mockBoxScoreData.homeTeam.quarterScores.total}
+                                        </p>
+                                      </div>
                                     </td>
                                   </tr>
                                 )}
@@ -3118,19 +3161,162 @@ const renderTeamLogos = useMemo(() => {
                           })()}
                         </tbody>
                       </table>
-                      {/* End of table */}
                     </div>
                   </div>
                 </div>
               </div>
               {/* Team Players Table */}
-              <div className="bg-white rounded-md p-3 border shadow-lg mt-4">
-                <div className="flex justify-between items-center mb-2">
-                  {/* Update the team name in the players table header: */}
-                  <h3 className="text-lg font-semibold flex items-center">
-                    {selectedTeam} Players <HelpCircle className="h-4 w-4 ml-1 text-muted-foreground" />
-                  </h3>
-                  <div className="flex rounded-full bg-[#e2e8f0] p-0.5">
+              <div className="mt-6 bg-white rounded-md p-3 border shadow-lg">
+                <div className="flex justify-between items-center border-b-2 border-gray-800 pb-2">
+                  <h3 className="text-md font-semibold flex items-center">{selectedTeam} Players</h3>
+                  <div className="text-sm text-muted-foreground"></div>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-gray-700 bg-gray-50 h-8">
+                        <th className="text-left py-1 px-1 font-medium border-r border-gray-300 sticky left-0 bg-gray-50 z-10">
+                          Player
+                        </th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">Team</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">GP</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">GS</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">MIN</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">PTS</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">2PM</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">2PA</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">2P%</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">3PM</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">3PA</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">3P%</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">FTM</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">FTA</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">FT%</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">OR</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">DR</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">TR</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">AST</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">STL</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">TO</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">BLK</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">BLKA</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">FC</th>
+                        <th className="text-center py-1 px-1 font-medium border-r border-gray-300">FD</th>
+                        <th className="text-center py-1 px-1 font-medium">PIR</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {playerStats
+                        .filter((player) => {
+                          // Map team codes to team names for filtering
+                          const teamCodeMap = {
+                            TEN: "Lenovo Tenerife",
+                            MAD: "Real Madrid",
+                            BAR: "FC Barcelona",
+                            BAS: "Baskonia Vitoria-Gasteiz",
+                            UNI: "UCAM Murcia",
+                            VAL: "Valencia Basket",
+                            RMA: "Real Madrid",
+                            MUR: "UCAM Murcia",
+                          }
+
+                          // Get the team name for the current player's team code
+                          const playerTeamName = teamCodeMap[player.team]
+
+                          // Check if the player's team matches the selected team
+                          // For Real Madrid, we need to check both MAD and RMA codes
+                          if (selectedTeam === "Real Madrid") {
+                            return player.team === "MAD" || player.team === "RMA"
+                          }
+
+                          // For other teams, check if the team name matches
+                          return playerTeamName === selectedTeam
+                        })
+                        .map((player, index) => (
+                          <tr
+                            key={player.player}
+                            className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${
+                              index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                            }`}
+                          >
+                            <td className="py-1 px-1 font-medium border-r border-gray-200 sticky left-0 bg-inherit whitespace-nowrap">
+                              <div className="flex items-center">
+                                <div className="w-5 h-5 rounded-full bg-gray-200 mr-2 flex items-center justify-center overflow-hidden">
+                                  {playerImages.find((img) => img.name === player.player)?.image ? (
+                                    <img
+                                      src={
+                                        playerImages.find((img) => img.name === player.player)?.image ||
+                                        "/placeholder.svg" ||
+                                        "/placeholder.svg"
+                                      }
+                                      alt={player.player}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  ) : (
+                                    <span className="text-xs font-bold">
+                                      {player.player
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </span>
+                                  )}
+                                </div>
+                                {player.player}
+                              </div>
+                            </td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200">{player.team}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.gp}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.gs}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.min}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.pts}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.twopm}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.twopa}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.twop}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">
+                              {player.threepm}
+                            </td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">
+                              {player.threepa}
+                            </td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">
+                              {player.threep}
+                            </td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.ftm}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.fta}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.ft}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.or}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.dr}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.tr}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.ast}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.stl}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.to}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.blk}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.blka}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.fc}</td>
+                            <td className="py-1 px-1 text-center border-r border-gray-200 font-mono">{player.fd}</td>
+                            <td className="py-1 px-1 text-center font-mono">{player.pir}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
+          )}
+        </TabsContent>
+
+        <TabsContent value="players" className="space-y-4">
+          <div className="flex flex-col gap-4">
+            <div className="bg-white rounded-md p-4 border shadow-sm">
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xl font-bold">Player Statistics</h3>
+                  <HelpCircle className="h-4 w-5 text-gray-400" />
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="flex rounded-full bg-gray-100 p-0.5">
                     <button
                       onClick={() => setPlayerStatsMode("avg")}
                       className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -3157,370 +3343,114 @@ const renderTeamLogos = useMemo(() => {
                     </button>
                   </div>
                 </div>
-                <div className="overflow-x-auto mt-2">
-                  <table className="w-full text-xs border-collapse">
-                    <thead className="border-t-2 border-b-2 border-gray-700">
-                      <tr className="bg-gray-50 h-10">
-                        <th className="text-left py-1 px-2 font-medium w-10">#</th>
-                        <th
-                        className="text-left py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors min-w-[200px]"
+              </div>
+
+              {/* Player statistics content */}
+              <div className="overflow-x-auto">
+                <div className="flex justify-between items-center mb-4">
+                  <div className="relative w-64">
+                    <input
+                      type="text"
+                      placeholder="Search player..."
+                      value={playerSearchQuery}
+                      onChange={(e) => setPlayerSearchQuery(e.target.value)}
+                      className="px-4 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    />
+                  </div>
+                </div>
+
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b-2 border-t-2 border-gray-700 bg-gray-50 h-10">
+                      <th
+                        className="text-left py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("player")}
                       >
                         <div className="flex items-center">Player {renderPlayerSortIndicator("player")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("team")}
                       >
                         <div className="flex items-center justify-center">Team {renderPlayerSortIndicator("team")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("gp")}
                       >
                         <div className="flex items-center justify-center">GP {renderPlayerSortIndicator("gp")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("gs")}
-                      >
-                        <div className="flex items-center justify-center">GS {renderPlayerSortIndicator("gs")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("min")}
-                      >
-                        <div className="flex items-center justify-center">MIN {renderPlayerSortIndicator("min")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("pts")}
                       >
                         <div className="flex items-center justify-center">PTS {renderPlayerSortIndicator("pts")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("twopm")}
-                      >
-                        <div className="flex items-center justify-center">2PM {renderPlayerSortIndicator("twopm")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("twopa")}
-                      >
-                        <div className="flex items-center justify-center">2PA {renderPlayerSortIndicator("twopa")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("twop")}
-                      >
-                        <div className="flex items-center justify-center">2P% {renderPlayerSortIndicator("twop")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("threepm")}
-                      >
-                        <div className="flex items-center justify-center">3PM {renderPlayerSortIndicator("threepm")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("threepa")}
-                      >
-                        <div className="flex items-center justify-center">3PA {renderPlayerSortIndicator("threepa")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("threep")}
-                      >
-                        <div className="flex items-center justify-center">3P% {renderPlayerSortIndicator("threep")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("ftm")}
-                      >
-                        <div className="flex items-center justify-center">FTM {renderPlayerSortIndicator("ftm")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("fta")}
-                      >
-                        <div className="flex items-center justify-center">FTA {renderPlayerSortIndicator("fta")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("ft")}
-                      >
-                        <div className="flex items-center justify-center">FT% {renderPlayerSortIndicator("ft")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("or")}
-                      >
-                        <div className="flex items-center justify-center">OR {renderPlayerSortIndicator("or")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("dr")}
-                      >
-                        <div className="flex items-center justify-center">DR {renderPlayerSortIndicator("dr")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("tr")}
                       >
-                        <div className="flex items-center justify-center">TR {renderPlayerSortIndicator("tr")}</div>
+                        <div className="flex items-center justify-center">REB {renderPlayerSortIndicator("tr")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("ast")}
                       >
                         <div className="flex items-center justify-center">AST {renderPlayerSortIndicator("ast")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("stl")}
                       >
                         <div className="flex items-center justify-center">STL {renderPlayerSortIndicator("stl")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("to")}
-                      >
-                        <div className="flex items-center justify-center">TO {renderPlayerSortIndicator("to")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("blk")}
                       >
                         <div className="flex items-center justify-center">BLK {renderPlayerSortIndicator("blk")}</div>
                       </th>
                       <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("blka")}
-                      >
-                        <div className="flex items-center justify-center">BLKA {renderPlayerSortIndicator("blka")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("fc")}
-                      >
-                        <div className="flex items-center justify-center">FC {renderPlayerSortIndicator("fc")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
-                        onClick={() => handlePlayerSort("fd")}
-                      >
-                        <div className="flex items-center justify-center">FD {renderPlayerSortIndicator("fd")}</div>
-                      </th>
-                      <th
-                        className="text-center py-1 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors"
+                        className="text-center py-1.5 px-2 font-medium cursor-pointer hover:bg-gray-100 transition-colors border-r border-gray-300"
                         onClick={() => handlePlayerSort("pir")}
                       >
                         <div className="flex items-center justify-center">PIR {renderPlayerSortIndicator("pir")}</div>
                       </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedPlayers.map((player, index) => (
+                      <tr
+                        key={player.player}
+                        className={`border-b-2 border-gray-200 hover:bg-gray-50 transition-colors ${
+                          index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                        }`}
+                      >
+                        <td className="py-1 px-2 font-medium border-r border-gray-200 whitespace-nowrap">
+                          {player.player}
+                        </td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200">
+                          <div className="flex items-center justify-center">
+                            {getTeamLogo(player.team)}
+                            {player.team}
+                          </div>
+                        </td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.gp}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.pts}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.tr}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.ast}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.stl}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.blk}</td>
+                        <td className="py-1 px-2 text-center border-r border-gray-200 font-mono">{player.pir}</td>
                       </tr>
-                    </thead>
-                    
-                    <tbody>
-                      {playerStats
-                        .filter((player) => player.team === "TEN")
-                        .map((player) => calculatePlayerStats(player, playerStatsMode))
-                        .sort((a, b) => {
-                          const aValue = a[playerSortColumn]
-                          const bValue = b[playerSortColumn]
-
-                          if (playerSortDirection === "desc") {
-                            return bValue - aValue
-                          } else {
-                            return aValue - bValue
-                          }
-                        })
-                        .map((player, index) => {
-                          // Get all players for this team with the current stats mode
-                          const teamPlayers = playerStats
-                            .filter(p => p.team === "TEN")
-                            .map(p => calculatePlayerStats(p, playerStatsMode));
-                          
-                          // Calculate min and max values for each stat column
-                          const getColumnValues = (stat) => {
-                            return teamPlayers.map(p => {
-                              if (stat === '2p%') {
-                                return (p.twopm / p.twopa) * 100;
-                              }
-                              return p[stat];
-                            });
-                          };
-                          
-                          // Get values for each column
-                          const ptsValues = getColumnValues('pts');
-                          const twoPmValues = getColumnValues('twopm');
-                          const twoPaValues = getColumnValues('twopa');
-                          const twoPctValues = teamPlayers.map(p => (p.twopm / p.twopa) * 100);
-                          const threePmValues = getColumnValues('threepm');
-                          const threePaValues = getColumnValues('threepa');
-                          const threePctValues = getColumnValues('threep');
-                          const ftmValues = getColumnValues('ftm');
-                          const ftaValues = getColumnValues('fta');
-                          const ftPctValues = getColumnValues('ft');
-                          const orValues = getColumnValues('or');
-                          const drValues = getColumnValues('dr');
-                          const trValues = getColumnValues('tr');
-                          const astValues = getColumnValues('ast');
-                          const stlValues = getColumnValues('stl');
-                          const toValues = getColumnValues('to');
-                          const blkValues = getColumnValues('blk');
-                          const blkaValues = getColumnValues('blka');
-                          const pirValues = getColumnValues('pir');
-                          
-                          // Calculate 2P%
-                          const twoPct = (player.twopm / player.twopa) * 100;
-                          // Function to get gray shade based on value's percentile in the dataset
-                          const getGrayShade = (value, allValues, higherIsBetter = true) => {
-                            if (!value || !allValues || allValues.length === 0) return {}
-
-                            // Sort values to determine percentiles
-                            const sortedValues = [...allValues].sort((a, b) => a - b)
-
-                            // Find the percentile of the current value
-                            const index = sortedValues.findIndex((v) => v >= value)
-                            const percentile = index / sortedValues.length
-
-                            // Determine shade based on percentile
-                            let backgroundColor, textColor
-                            if (higherIsBetter) {
-                            if (percentile > 0.8) {
-                              backgroundColor = "#94a3b8" // slate-400
-                              textColor = "black"
-                            } else if (percentile > 0.6) {
-                              backgroundColor = "#cbd5e1" // slate-300
-                              textColor = "black"
-                            } else if (percentile > 0.4) {
-                              backgroundColor = "#e2e8f0" // slate-200
-                              textColor = "black"
-                            } else if (percentile > 0.2) {
-                              backgroundColor = "#f1f5f9" // slate-100
-                              textColor = "black"
-                            } else {
-                              backgroundColor = "#f8fafc" // slate-50
-                              textColor = "black"
-                            }
-                          } else {
-                            if (percentile < 0.2) {
-                              backgroundColor = "#94a3b8" // slate-400
-                              textColor = "black"
-                            } else if (percentile < 0.4) {
-                              backgroundColor = "#cbd5e1" // slate-300
-                              textColor = "black"
-                            } else if (percentile < 0.6) {
-                              backgroundColor = "#e2e8f0" // slate-200
-                              textColor = "black"
-                            } else if (percentile < 0.8) {
-                              backgroundColor = "#f1f5f9" // slate-100
-                              textColor = "black"
-                            } else {
-                              backgroundColor = "#f8fafc" // slate-50
-                              textColor = "black"
-                            }
-                          }
-
-                          return { backgroundColor, color: textColor }
-                          }
-                          return (
-                            <tr
-                              key={player.player}
-                              className={`border-b-2 ${
-                                player.player === "2"
-                                  ? "bg-teal-400/20 border-l-4 border-l-teal-400"
-                                  : index % 2 === 0
-                                    ? "bg-white"
-                                    : "bg-white"
-                              } hover:bg-gray-100 transition-colors`}
-                            >
-                              <td className="py-1 px-2 text-center">{player.rank}</td>
-                              <td className="py-1 px-2 font-medium">{player.player}</td>
-                              <td className="py-1 px-2 text-center">{player.team}</td>
-                              <td className="py-1 px-2 text-center">{player.gp}</td>
-                              <td className="py-1 px-2 text-center">{player.gs}</td>
-                              <td className="py-1 px-2 text-center">{player.min}</td>
-                              <td className="py-1 px-2 text-center font-medium" style={getGrayShade(player.pts, ptsValues)}>
-                                {player.pts}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.twopm, twoPmValues)}>
-                                {player.twopm}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.twopa, twoPaValues)}>
-                                {player.twopa}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(twoPct, twoPctValues)}>
-                                {twoPct.toFixed(1)}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.threepm, threePmValues)}>
-                                {player.threepm}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.threepa, threePaValues)}>
-                                {player.threepa}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.threep, threePctValues)}>
-                                {player.threep}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.ftm, ftmValues)}>
-                                {player.ftm}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.fta, ftaValues)}>
-                                {player.fta}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.ft, ftPctValues)}>
-                                {player.ft}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.or, orValues)}>
-                                {player.or}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.dr, drValues)}>
-                                {player.dr}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.tr, trValues)}>
-                                {player.tr}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.ast, astValues)}>
-                                {player.ast}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.stl, stlValues)}>
-                                {player.stl}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.to, toValues, false)}>
-                                {player.to}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.blk, blkValues)}>
-                                {player.blk}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.blka, blkaValues, false)}>
-                                {player.blka}
-                              </td>
-                              <td className="py-1 px-2 text-center" style={getGrayShade(player.pir, pirValues)}>
-                                {player.pir}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </>
-          )}
+            </div>
+          </div>
         </TabsContent>
-
-        <TabsContent value="players" className="space-y-4">
-          <div className="flex flex-col gap-4">
-            <div className="bg-white rounded-md p-4 border shadow-sm">
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xl font-bold">Player Statistics</h3>
-                  <HelpCircle className="h-4 w-5 text-gray-400" />
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="flex rounded-full bg-gray-100 p-0.5">
-                    <button
-                      onClick={() => setPlayerStatsMode("avg")}\
-                      className=
+      </Tabs>
+    </div>
+  )
+}
